@@ -11,7 +11,7 @@
     "start": "node app.js",
     "client": "cd client && npm start",
     "mern": "concurrently -n 'server,client' -c 'red,green' \"nodemon app.js\" \"npm run client\"",
-    "build": "cd client && npm install && npm run build && cd.. && npm install"
+    "build": "npm install && cd client && npm install && npm run build"
   },
   "author": "its me",
   "license": "ISC",
@@ -26,8 +26,8 @@
     "mongoose": "^5.9.23",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1"
   }
