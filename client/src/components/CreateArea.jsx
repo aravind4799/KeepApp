@@ -1,87 +1,83 @@
-import React, { useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
 import axios from "axios";
 import Note from "./Note";
-import DOMPurify from 'dompurify';
-
+import DOMPurify from "dompurify";
 
 function CreateArea(props) {
-
   const [user_notes, setdetails] = useState([]);
 
   const [note, setNote] = useState({
     title: "",
-    content: ""
+    content: "",
   });
 
   const [state, setstate] = useState(false);
 
   const getdata = () => {
-    axios.get("http://localhost:3010/getuserdetails",{params:{username:props.username}})
+    axios
+      .get("https://keeper-app-kgxr.onrender.com/getuserdetails", {
+        params: { username: props.username },
+      })
 
-    .then((response) => {
-         console.log(response.data )
-         setdetails(response.data)
-        
-    })
-    .catch((response)=> (console.log(response)))
-  }
-  
-  useEffect(()=>{
-    getdata()
-  },[])
- 
+      .then((response) => {
+        console.log(response.data);
+        setdetails(response.data);
+      })
+      .catch((response) => console.log(response));
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setNote(prev_value => {
-      return({
+    setNote((prev_value) => {
+      return {
         ...prev_value,
-        [name]:value
-      })
-    } )
-
-   
+        [name]: value,
+      };
+    });
   }
 
-
-   const submitNote = (e) => {
+  const submitNote = (e) => {
     e.preventDefault();
     axios({
-      url: 'http://localhost:3010/save',
-      method: 'POST',
+      url: "https://keeper-app-kgxr.onrender.com/save",
+      method: "POST",
       data: {
-        username:props.username,
-        newnote:note    
-      }
-    }).then(response => {
-      if(response.data.saved){
+        username: props.username,
+        newnote: note,
+      },
+    }).then((response) => {
+      if (response.data.saved) {
         setNote({
-          title:"",
-          content:""
-        })
+          title: "",
+          content: "",
+        });
         getdata();
       }
-    })
+    });
   };
 
-  function deleteNote(title,content) {
+  function deleteNote(title, content) {
     axios({
-      url:"http://localhost:3010/delete",
-      method:'POST',
-      data:{
-        username:props.username,
-        title:title,
-        content:content
-      }
-    }).then(response => {
-      if(response.data.deleted){
+      url: "https://keeper-app-kgxr.onrender.com/delete",
+      method: "POST",
+      data: {
+        username: props.username,
+        title: title,
+        content: content,
+      },
+    }).then((response) => {
+      if (response.data.deleted) {
         getdata();
       }
-    })
-    
+    });
   }
 
   function handle_text_click() {
@@ -89,11 +85,10 @@ function CreateArea(props) {
   }
 
   return (
-    <div className="div-form" >
-      <form className="create-note" >
+    <div className="div-form">
+      <form className="create-note">
         {state && (
           <input
-            
             name="title"
             onChange={handleChange}
             value={DOMPurify.sanitize(note.title)}
@@ -102,7 +97,6 @@ function CreateArea(props) {
         )}
 
         <textarea
-     
           name="content"
           onClick={handle_text_click}
           onChange={handleChange}
@@ -118,9 +112,9 @@ function CreateArea(props) {
         </Zoom>
       </form>
 
-      { user_notes.map((noteItem, index) => {
+      {user_notes.map((noteItem, index) => {
         return (
-           < Note
+          <Note
             key={index}
             id={index}
             title={noteItem.title}
@@ -128,10 +122,8 @@ function CreateArea(props) {
             onDelete={deleteNote}
           />
         );
-      }) }
+      })}
     </div>
-
-    
   );
 }
 
