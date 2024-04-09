@@ -10,4 +10,4 @@ An application built using the MERN stack mimics the features of the google kepp
 
 #Tech Stack: MERN
 
-Note: Since this application is hosted on the render platform [Link text]([URL](https://render.com/)) on a free instance it might spin down with inactivity, which can delay requests by 50 seconds or more. 
+Note: Since this application is hosted on the render platform [https://render.com/](https://render.com/) on a free instance it might spin down with inactivity, which can delay requests by 50 seconds or more. 
