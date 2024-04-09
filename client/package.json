@@ -15,15 +15,15 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^5.0.1",
     "webpack": "4.44.2"
   },
   "devDependencies": {
     "typescript": "3.3.3"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
